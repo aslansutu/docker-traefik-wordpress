@@ -7,7 +7,7 @@ version: '3'
 
 networks:
   # enable connection with Traefik
-  traefik:
+  traefik-proxy:
     external: true
   # network for the app
   wp-network:
@@ -37,7 +37,7 @@ services:
       # link the content of WordPress in a directory to enable local modifications
       - ./wordpress/data:/var/www/html
     networks:
-      - traefik
+      - traefik-proxy
       - wp-network
     depends_on:
         - wp-db
@@ -111,7 +111,7 @@ services:
     image: phpmyadmin/phpmyadmin
     networks:
       - wp-network
-      - traefik
+      - traefik-proxy
     depends_on:
       - wp-db
     restart: always
